@@ -1,0 +1,427 @@
+<!-- 3f839fc8b99f4c20a26ef5adfdb37d38  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">NewsApp</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sports</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Weather</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              id="searchInput"
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button id="search" class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>Welcome to News App (<span id="resultCount"></span>Results)</h1>
+      <div class="row content"></div>
+      <div class="d-flex justify-content-around my-4">
+        <button class="btn btn-primary" id="prev">&lt; Previous Page</button>
+        <button class="btn btn-primary" id="next">Next Page &gt;</button>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      let currentQuery = "sports";
+      let currentPage = 1;
+      const fetchNews = async (page, q) => {
+        console.log(`Fetching news for ${q}, Page number ${page}....`);
+        var url =
+          "https://newsapi.org/v2/everything?" +
+          "q=" +
+          q +
+          "&from=2024-07-10&" +
+          "pageSize=20&" +
+          "language=en&" +
+          "page=" +
+          page +
+          "&sortBy=popularity&" +
+          "apiKey=3f839fc8b99f4c20a26ef5adfdb37d38";
+
+        var req = new Request(url);
+
+        // let a = await fetch(req);
+        // let response = await a.json();
+        // console.log(JSON.stringify(response));
+
+        let response = {
+          status: "ok",
+          totalResults: 102,
+          articles: [
+            {
+              source: { id: null, name: "AppleInsider" },
+              author: "news@appleinsider.com (Chip Loder)",
+              title: "How to refurbish and restore the original Apple TV",
+              description:
+                "Apple first released the Apple TV set-top box in 2006. Here's how to refurbish and restore one of the original units, to make the set-top box as good as new.Apple TV 1st generation.All through the 1990s, Apple had been toying with the idea of making a set-top…",
+              url: "https://appleinsider.com/inside/apple-tv/tips/how-to-refurbish-and-restore-the-original-apple-tv",
+              urlToImage:
+                "https://photos5.appleinsider.com/gallery/60147-123472-tv1-lede-xl.jpg",
+              publishedAt: "2024-07-10T02:56:40Z",
+              content:
+                "Apple TV 1st generation.\r\nApple first released the Apple TV set-top box in 2006. Here's how to refurbish and restore one of the original units, to make the set-top box as good as new.\r\nAll through th… [+36003 chars]",
+            },
+            {
+              source: { id: null, name: "iLounge" },
+              author: "Abhay Ram",
+              title:
+                "Apple developing thinner iPhone, MacBook Pro, and Apple Watch",
+              description:
+                "Apple is planning to develop thinner MacBook Pro, Apple Watch, and iPhone, reports noted tech reports Mark Gurman of Bloomberg. The move would be in-line with the recent iPad Pro release which saw the device turn thinner than the iPad Air. In the past, the co…",
+              url: "https://www.ilounge.com/news/apple-thinner-devices-planned",
+              urlToImage:
+                "https://www.ilounge.com/wp-content/uploads/2024/05/iPad-Pro-.png",
+              publishedAt: "2024-07-10T02:53:54Z",
+              content:
+                "Apple is planning to develop thinner MacBook Pro, Apple Watch, and iPhone, reports noted tech reports Mark Gurman of Bloomberg. The move would be in-line with the recent iPad Pro release which saw th… [+1649 chars]",
+            },
+            {
+              source: { id: null, name: "Osxdaily.com" },
+              author: "Paul Horowitz",
+              title:
+                "Beta 3 of iOS 17.6, iPadOS 17.6, & macOS Sonoma 14.6 Available for Beta Testing",
+              description:
+                "While the majority of the Apple beta testing world has moved into iOS 18 beta, iPadOS 18 beta, and MacOS Sequoia beta, Apple continues to release beta versions for upcoming current generation system software as well. In this case, iOS 17.6 beta 3, iPadOS 17.6…",
+              url: "https://osxdaily.com/2024/07/09/beta-3-of-ios-17-6-ipados-17-6-macos-sonoma-14-6-available-for-beta-testing/",
+              urlToImage:
+                "https://cdn.osxdaily.com/wp-content/uploads/2023/07/ios-macos-ipados-betas.jpg",
+              publishedAt: "2024-07-10T01:08:55Z",
+              content:
+                "While the majority of the Apple beta testing world has moved into iOS 18 beta, iPadOS 18 beta, and MacOS Sequoia beta, Apple continues to release beta versions for upcoming current generation system … [+1380 chars]",
+            },
+            {
+              source: { id: null, name: "Ifanr.com" },
+              author: "何晓涵",
+              title:
+                "早报|多电商平台下架中储粮金鼎食用油/去哪儿员工每周有 2 天可灵活办公/曝华为 Mate60 系列销量已过千万",
+              description:
+                "· 微软：希望为员工提供访问必要应用程序的途径\n· 北京拟支持自动驾驶汽车用于网约车\n· 微信公众号支持修改标题#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。\n爱范儿 |\n原文链接 ·\n查看评论 ·\n新浪微博",
+              url: "https://www.ifanr.com/1592010",
+              urlToImage:
+                "https://s3.ifanr.com/images/ep/cover-images/sha_tan_shang_fang_feng_zheng_de_ren_cover.jpg",
+              publishedAt: "2024-07-10T00:19:14Z",
+              content:
+                "OpenAI CEO AI \r\nOpenAI CEO Sam Altman Thrive Global CEO Arianna Huffington Thrive AI Health \r\n OpenAI Startup Fund Thrive Global Google DeCarlos Love CEO\r\nThrive AI Health AI App \r\nSam Altman AI \r\n9 … [+1156 chars]",
+            },
+            {
+              source: { id: "techradar", name: "TechRadar" },
+              author: "cesartechradar@gmail.com (Cesar Cadenas)",
+              title:
+                "Gemini Live's background mode and app extensions could blow Apple Intelligence away",
+              description:
+                "A new leak reveals Gemini Live could work in the background for ease of use and even control smart home devices.",
+              url: "https://www.techradar.com/computing/artificial-intelligence/gemini-lives-background-mode-and-app-extensions-could-blow-apple-intelligence-away",
+              urlToImage:
+                "https://cdn.mos.cms.futurecdn.net/AxDXqBirTutoGpcZZPjNt9-1200-80.jpg",
+              publishedAt: "2024-07-10T01:00:00Z",
+              content:
+                "During Google I/O 2024, the tech giant previewed Gemini Live, a unique version of the AI on mobile capable of holding “natural conversations.” You can think of it like Siri, as you’ll be able to enga… [+3315 chars]",
+            },
+            {
+              source: { id: null, name: "Tinhte.vn" },
+              author: "no-reply@tinhte.vn (Pnghuy), Pnghuy",
+              title:
+                'Chip 2nm đầu tiên trên thế giới mà Apple "đặt hàng" TSMC sẽ được sản xuất thử nghiệm trong tuần tới',
+              description:
+                "Apple có thể đi sau về tính năng, về công nghệ phần mềm so với Intel, AMD hay NVIDIA, nhưng nếu nói về cuộc đua tiến trình sản xuất trên chip, Apple chưa ngán bất cứ đối thủ nào và với tiềm lực của họ, những con chip với tiến trình sản xuất mới đều…",
+              url: "https://tinhte.vn/thread/chip-2nm-dau-tien-tren-the-gioi-ma-apple-dat-hang-tsmc-se-duoc-san-xuat-thu-nghiem-trong-tuan-toi.3805087/",
+              urlToImage:
+                "https://photo2.tinhte.vn/data/attachment-files/2024/07/8388430_cover-Apple-silicon-2nm.jpg",
+              publishedAt: "2024-07-10T00:54:22Z",
+              content:
+                "Apple có th i sau v tính nng, v công ngh phn mm so vi Intel, AMD hay NVIDIA, nhng nu nói v cuc ua tin trình sn xut trên chip, Apple cha ngán bt c i th nào và vi tim lc ca h, nhng con chip vi tin trìn… [+1413 chars]",
+            },
+            {
+              source: { id: null, name: "Geekpark.net" },
+              author: null,
+              title:
+                "传小鹏新车或放弃激光雷达，马斯克评论；台积电试产2nm芯片；去哪儿推每周在家办公两天",
+              description:
+                "消息称台积电下周开始试产 2nm 芯片，有望率先用于苹果 iPhone 17\n7 月 9 日消息，据 ET News 报道，苹果芯片代工厂商台积电将于下周开始试产 2nm 芯片，计划在明年将该技术应用于 Apple Silicon 芯片。\n此次试产将在台积电位于台湾地区北部的宝山厂进行，用于 2nm 芯片生产的设备已于今年第二季度运抵该工厂。苹果预计将在 2025 年将其定制芯片转移到 2nm 制造工艺。\n据 IT 之家了解，iPhone 15 Pro 使用的是采用台积电 3nm 工艺制造的 A17 Pro 芯片…",
+              url: "https://www.geekpark.net/news/337754",
+              urlToImage:
+                "https://imgslim.geekpark.net/uploads/image/file/47/ff/47ff6ddcd53353d5ae1fb794b403d75f.png",
+              publishedAt: "2024-07-10T00:57:13Z",
+              content:
+                "2nm iPhone 17\r\n7 9 ET News 2nm Apple Silicon \r\n 2nm 2025 2nm \r\n IT iPhone 15 Pro 3nm A17 Pro iPad Pro M4 3nm 2nm 3nm 10-15% 30%IT \r\niPhone\r\n7 9 iPhone 9 Android \r\n Authenticator Identity Pass iPhone1… [+1047 chars]",
+            },
+            {
+              source: { id: null, name: "Yanko Design" },
+              author: "Sarang Sheth",
+              title:
+                "Ultra-sleek Waterdrop X16 RO Purifier brings mineral-rich water with a single touch",
+              description:
+                "Ultra-sleek Waterdrop X16 RO Purifier brings mineral-rich water with a single touchI don’t know about you but I’ve never seen a water filtration system that looks elegant enough to integrate into your house or kitchen’s decor....",
+              url: "https://www.yankodesign.com/2024/07/09/ultra-sleek-waterdrop-x16-ro-purifier-brings-mineral-rich-water-with-a-single-touch/",
+              urlToImage:
+                "https://www.yankodesign.com/images/design_news/2024/07/ultra-sleek-waterdrop-x16-ro-purifier-brings-mineral-rich-water-with-a-single-touch/Waterdrop_X_Series_Undersink_Reverse_Osmosis_System_X16_layout.jpg",
+              publishedAt: "2024-07-10T01:45:32Z",
+              content:
+                "I don’t know about you but I’ve never seen a water filtration system that looks elegant enough to integrate into your house or kitchen’s decor. They’re almost always made of plastic, with a design th… [+5639 chars]",
+            },
+            {
+              source: { id: null, name: "DIE WELT" },
+              author: "Philipp Kania",
+              title: "Angriffe auf Zivilisten – „Business as usual für Putin“",
+              description:
+                "Die Ukraine wurde Anfang der Woche von schweren russischen Raketenangriffen getroffen. In Kiew starben dutzende Menschen. Welches Kalkül Putin mit den Attacken verfolgt, auch in Hinblick auf den NATO-Gipfel, weiß WELT-Russland-Korrespondent Pavel Lokshin.",
+              url: "https://www.welt.de/podcasts/article252438658/Angriffe-auf-Zivilisten-Business-as-usual-fuer-Putin-Politik-Podcast.html",
+              urlToImage:
+                "https://img.welt.de/img/podcasts/mobile251707336/4361354707-ci16x9-w1200/DWO-Podcast-Teaser-Das-bringt-der-Tag-Kania.jpg",
+              publishedAt: "2024-07-10T02:53:13Z",
+              content:
+                "Hier können Sie die aktuelle Folge von Das bringt der Tag direkt hören:\r\nAbonnieren Sie den Podcast unter anderem bei Spotify, Apple Podcasts oder Amazon Music.\r\nDas bringt der Tag jeden Morgen ab 5 … [+805 chars]",
+            },
+            {
+              source: { id: null, name: "Cracked.com" },
+              author: "JM McNab",
+              title:
+                "Nobody Other Than George Harrison Wanted to Make the Original ‘Time Bandits’",
+              description: "By JM McNab Published: July 09th, 2024",
+              url: "https://www.cracked.com/article_42796_nobody-other-than-george-harrison-wanted-to-make-the-original-time-bandits.html",
+              urlToImage:
+                "https://s3.crackedcdn.com/phpimages/article/0/2/0/1111020.jpg",
+              publishedAt: "2024-07-10T00:30:00Z",
+              content:
+                "Because Hollywood wont rest until its turned every Terry Gilliam movie into a TV show, Apple TV+ will soon be releasing a Time Bandits series, starring Lisa Kudrow as a temporal plunderer. \r\nWhile re… [+3309 chars]",
+            },
+            {
+              source: { id: null, name: "Cracked.com" },
+              author: "Keegan Kelly",
+              title:
+                "John Oliver Fans Believe That Warner Bros. Discovery Is Deliberately Sabotaging ‘Last Week Tonight’",
+              description:
+                "Does David Zaslav consider John Oliver to be politically problematic? Is that why Max keeps trying hide his show from us?",
+              url: "https://www.cracked.com/article_42794_john-oliver-fans-believe-that-warner-bros-discovery-is-deliberately-sabotaging-last-week-tonight.html",
+              urlToImage:
+                "https://s3.crackedcdn.com/phpimages/article/0/1/6/1111016.jpg",
+              publishedAt: "2024-07-10T01:40:00Z",
+              content:
+                "If David Zaslav is trying to give Last Week Tonight with John Oliver the Coyote vs. Acmetreatment as hes been accused of doing by the shows fans, Warner Bros. Discovery will find that any attempt to … [+3755 chars]",
+            },
+            {
+              source: { id: null, name: "Smhn.info" },
+              author: "會原",
+              title:
+                "【衝撃】機械式電源/音量ボタンが廃止されたiPhone 15 Proの試作機が発見される。触覚フィードバック化",
+              description:
+                "Appleが開発していたiPhone 15 Pro向けの、非機械式化された音量ボタンと電源ボタンの詳細と外観が明らかになりました。海外サイトApple Insiderが独占的に入手した情報によると、これらの非機械式ボタンは「Project Bongo」というコードネームで開発され...smhn.infoにアクセスすると、全文を読むことができます。",
+              url: "https://smhn.info/202407-iphone-15-pro-evt",
+              urlToImage:
+                "https://smhn.info/wp-content/uploads/2024/07/60299-123947-Bongo-Power-xl.jpg",
+              publishedAt: "2024-07-10T00:56:39Z",
+              content:
+                "AppleiPhone 15 Pro\r\nApple InsideriPhone 15 ProiPhone 15 Pro MaxMagic Trackpad\r\niPhone 15 ProProject Bongo\r\nAppleBongo Haptic EngineTaptic EngineApple Insider\r\niPhone 7iPhone 7iPhone 15 Pro Max\r\nSpons… [+61 chars]",
+            },
+            {
+              source: { id: null, name: "Smhn.info" },
+              author: "會原",
+              title: "iPhone 16。Face IDに何らかの大きな変更がくる可能性",
+              description:
+                "アンダーディスプレイ、ではなさそう？今年後半に登場予定のiPhone 16シリーズに、Face IDに関連した「変更」がある可能性が浮上しました。サプライチェーンに精通した台湾の経済媒体「DigiTimes」が報じました。MacRumorsが伝えています。この情報の元となったのは...smhn.infoにアクセスすると、全文を読むことができます。",
+              url: "https://smhn.info/202407-iphone-16-face-id-rumors",
+              urlToImage:
+                "https://smhn.info/wp-content/uploads/2024/07/Beyond-iPhone-13-Better-Blue-Face-ID.webp",
+              publishedAt: "2024-07-10T01:51:23Z",
+              content:
+                "iPhone 16Face IDDigiTimesMacRumors\r\n6The TelegraphFace IDCoherentApple\r\nApple iPhone 16Face ID\r\nApple iPhone 16Face ID\r\nThe EleciPhone 16 ProFace IDUDCFace ID\r\nRoss Young2024Face IDiPhone2025\r\nSponso… [+205 chars]",
+            },
+            {
+              source: { id: null, name: "Ozbargain.com.au" },
+              author: "erroorfree",
+              title:
+                "Apple iPhone 14/14+/14 Pro/14 Pro Max Silicone Case with MagSafe $29, Apple Leather Case $29 Delivered @ Phonebot",
+              description:
+                "Phonebot priced to clear selected Apple iPhone 14 cases. Prices below include shipping.\n\nApple Silicon Cases w/MagSafe\n\n\n Apple Silicon Case w/MagSafe iPhone 14 $29\r\n\n \n Apple Silicon Case w/MagSafe iPhone 14 Plus $29\r\n\n \n Apple Silicon Case w/MagSafe iPhone …",
+              url: "https://www.ozbargain.com.au/node/855551",
+              urlToImage:
+                "https://files.ozbargain.com.au/n/51/855551l.jpg?h=5826a7a0",
+              publishedAt: "2024-07-10T00:10:31Z",
+              content:
+                "Phonebot priced to clear selected Apple iPhone 14 cases. Prices below include shipping.\r\nApple Silicon Cases w/MagSafe\r\nApple Silicon Case w/MagSafe iPhone 14$29\r\nApple Silicon Case w/MagSafe iPhone … [+765 chars]",
+            },
+            {
+              source: { id: null, name: "Smzdm.com" },
+              author: null,
+              title: "百亿补贴：Apple 苹果 iPhone 15 Pro 5G手机 256GB 6768元",
+              description:
+                "百亿补贴:Apple 苹果 iPhone 15 Pro 5G手机  256GB 6768元,什么值得买甄选出拼多多优惠促销商品,包括Apple/苹果报价、多少钱等信息,认真生活,好好花钱就上什么值得买。",
+              url: "https://www.smzdm.com/p/118754967/",
+              urlToImage:
+                "https://y.zdmimg.com/202309/13/6500b104b5a4f4674.png_d250.jpg",
+              publishedAt: "2024-07-10T01:39:18Z",
+              content:
+                "iPhone 15 Pro 6.1 ProMotion Super Retina XDR 120Hz iOS 17 187 \r\niPhone 15 Pro Action Action \r\niPhone 15 Pro A17 Pro 3nm CPU 16 10% 6 GPU 20% iPhone 15 Pro 3A\r\niPhone 15 Pro 48MP 242835mmiPhone 15 Pro… [+106 chars]",
+            },
+            {
+              source: { id: null, name: "iMore" },
+              author: "heyimjoew@gmail.com (Joe Wituschek)",
+              title:
+                "AirPods Pro 2 just got these sweet iOS 18 features if you're a developer",
+              description:
+                "Apple has released a beta firmware update for AirPods Pro 2 that includes two key features from iOS 18.",
+              url: "https://www.imore.com/airpods/airpods-pro-2-just-got-these-sweet-ios-18-features-if-youre-a-developer",
+              urlToImage:
+                "https://cdn.mos.cms.futurecdn.net/uEFcyGcp4R9KyEvbtRk2fD-1200-80.jpg",
+              publishedAt: "2024-07-10T02:43:01Z",
+              content:
+                "AirPods Pro 2 have been the best earbuds I've ever owned in my entire life and it's not even close. From a noticeable boost in sound quality compared to the first generation and fantastic features li… [+2342 chars]",
+            },
+            {
+              source: { id: null, name: "Digitimes" },
+              author: "DIGITIMES",
+              title:
+                "India reportedly asks Apple to consider local production plan for tablets and PCs",
+              description:
+                "The Indian government is reportedly urging Apple to increase the range of products manufactured in the country, including iPads and Macs. According to a Money Control report citing unnamed sources, the government is encouraging Apple to produce these devices …",
+              url: "https://www.digitimes.com/news/a20240709VL201/apple-government-production-airpods-byd.html",
+              urlToImage:
+                "https://img.digitimes.com/newsshow/20240709vl201_files/1_2b.jpg",
+              publishedAt: "2024-07-10T03:10:31Z",
+              content:
+                "Save my User ID and Password\r\nSome subscribers prefer to save their log-in information so they do not have to enter their User ID and Password each time they visit the site. To activate this function… [+307 chars]",
+            },
+            {
+              source: { id: null, name: "Unwire.hk" },
+              author: "唐美鳳",
+              title: "Galaxy Unpacked 舉行在即 Galaxy Buds3 耳機開箱片網上流傳",
+              description:
+                "雖然 Galaxy Unpacked 發佈會今晚才舉行，但有相信來自杜拜的科技博客已經急不及待，日前上載了 Galaxy Buds3 的包裝相片和開箱片段。爆料的 @OnlyTechAE 取得了兩盒，分別是白色和深灰色的 Galaxy Buds3，從包裝就可以再次確認，Samsung 一如傳聞般放棄使用多年的鈕型機身設計，改用有耳機柄的造型。\nThe post Galaxy Unpacked 舉行在即 Galaxy Buds3 耳機開箱片網上流傳 appeared first on 香港 unwire.hk 玩生…",
+              url: "https://unwire.hk/2024/07/10/galaxy-buds3-unbox-videos/mobile-music/headphones/",
+              urlToImage:
+                "https://cdn.unwire.hk/wp-content/uploads/2024/07/05-7-694x390.jpg",
+              publishedAt: "2024-07-10T01:00:22Z",
+              content:
+                "Galaxy Unpacked Galaxy Buds3 @OnlyTechAE Galaxy Buds3Samsung \r\n Samsung Apple Galaxy Buds3 AirPods Galaxy Buds3 LED AirPods Galaxy Buds3 Galaxy Buds3 Pro $150 $220 1,172 1,718 \r\n Galaxy Buds3 Galaxy … [+200 chars]",
+            },
+            {
+              source: { id: null, name: "Smzdm.com" },
+              author: null,
+              title:
+                "Apple 苹果 MacBook Pro M3版 14英寸 轻薄本 深空黑色 16414.01元（需用券）",
+              description:
+                "Apple 苹果 MacBook Pro M3版 14英寸 轻薄本 深空黑色 16414.01元（需用券）,什么值得买甄选出京东优惠促销商品,包括Apple/苹果报价、多少钱等信息,认真生活,好好花钱就上什么值得买。",
+              url: "https://www.smzdm.com/p/118746942/",
+              urlToImage:
+                "https://qny.smzdm.com/202310/31/654051b1dcc9e348.png_d250.jpg",
+              publishedAt: "2024-07-10T00:40:36Z",
+              content:
+                "MacBook Pro M3M3 3nm 250 10 M1 65% M3 8 4 4 M1 35% 24GB \r\nM3 Apple Mac M1 2.5 M1 30% 50% M1 60% AV1 M3 Mac app M1 2.5 Mac app M3 Apple M3M3 Pro M3 Max ML M1 60% AI/ML M3 H.264HEVCProRes ProRes RAW AV… [+180 chars]",
+            },
+            {
+              source: { id: null, name: "Natalie.mu" },
+              author: "音楽ナタリー",
+              title:
+                "フジファブリック「若者のすべて」志村正彦の誕生日にドルビーアトモス版配信",
+              description:
+                "フジファブリックの楽曲「若者のすべて」のドルビーアトモス版が、志村正彦（Vo, G）の誕生日である本日7月10日にApple MusicとAmazon Musicにて配信リリースされた。",
+              url: "https://natalie.mu/music/news/581636",
+              urlToImage:
+                "https://ogre.natalie.mu/media/news/music/2024/0710/fujifabric_wakamononosubete_jkt.jpg?impolicy=twitter_card_face_crop",
+              publishedAt: "2024-07-10T02:06:00Z",
+              content:
+                "@natalie_mu\r\nhttps://t.co/afpDH6ecfq\r\n# # https://t.co/iS0HQrZnFB",
+            },
+          ],
+        };
+        // console.log(response);
+
+        let str = "";
+
+        resultCount.innerHTML = response.totalResults;
+
+        for (let item of response.articles) {
+          str =
+            str +
+            ` <div class="card my-4 mx-2" style="width: 18rem">
+          <img height = "184" src="${
+            item.urlToImage
+          }" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">${item.title.slice(0, 23)}</h5>
+            <p class="card-text">
+              ${item.description.slice(0, 123)}...
+            </p>
+            <a href="${
+              item.url
+            }" target="_blank" class="btn btn-primary">Read Full Article</a>
+          </div>
+        </div>`;
+        }
+
+        document.querySelector(".content").innerHTML = str;
+      };
+      fetchNews(1, "currentQuery");
+      search.addEventListener("click", (e) => {
+        e.preventDefault();
+        let query = searchInput.value;
+        currentQuery = query;
+        fetchNews(1, query);
+      });
+      prev.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage = currentPage - 1;
+          fetchNews(currentPage, currentQuery);
+        }
+      });
+      next.addEventListener("click", (e) => {
+        e.preventDefault();
+        currentPage = currentPage + 1;
+        fetchNews(currentPage, currentQuery);
+      });
+    </script>
+  </body>
+</html>
